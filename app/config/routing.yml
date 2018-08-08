@@ -1,0 +1,3 @@
+mbh_sitederencontre:
+    resource: "@MBHSitederencontreBundle/Resources/config/routing.yml"
+    prefix:   /

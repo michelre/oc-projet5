@@ -1,0 +1,20 @@
+mbh_sitederencontre_home:
+  path:     /
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:index 
+
+
+mbh_sitederencontre_profilcompleted:
+  path:     /profilcompleted/{id}
+  defaults: 
+    _controller: MBHSitederencontreBundle:Advert:profilcompleted
+  requirements:
+    id: \d+ 
+    
+
+mbh_sitederencontre_monprofil:
+  path:     /monprofil/{id}
+  defaults: 
+    _controller: MBHSitederencontreBundle:Advert:monprofil
+  requirements:
+    id: \d+
