@@ -67,3 +67,11 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+fos_user:
+    db_driver:     orm
+    firewall_name: main 
+    user_class:    MBH\SitederencontreBundle\Entity\Members
+    from_email:
+        address:  "m.amb.88@hotmail.fr"
+        sender_name: "MBHFOSUserBundle"

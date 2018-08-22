@@ -21,11 +21,11 @@ class MembersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('pseudo',      TextType::class)
+        ->add('username',      TextType::class)
         ->add('birthday',    BirthdayType::class)
         ->add('city',        TextType::class)
-        ->add('email',       TextType::class)
-        ->add('password',    TextType::class)
+        ->add('email',       EmailType::class)
+        ->add('password',    PasswordType::class)
         ->add('gender',      TextType::class)
         ->add('description', TextareaType::class, array('required'=> false))
         ->add('job',         TextType::class, array('required'=> false))

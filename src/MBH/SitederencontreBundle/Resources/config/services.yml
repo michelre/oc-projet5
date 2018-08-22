@@ -1,4 +1,4 @@
 services:
-#    mbh_sitederencontre.example:
-#        class: MBH\SitederencontreBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  MBH\SitederencontreBundle\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%kernel.root_dir%/../web/uploads/images'

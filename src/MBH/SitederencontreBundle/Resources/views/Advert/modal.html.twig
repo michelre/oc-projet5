@@ -1,10 +1,11 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Modifier ma photo de profil
-</button> 
+</button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,14 +15,17 @@
         </button>
       </div>
       <div class="modal-body">
-         <div class="well">
-  			{{form(im)}}
-		</div>
+        <form action="{{ path('mbh_sitederencontre_imageprofile',{'id': members.id}) }}" method="post"
+              enctype="multipart/form-data">
+          <div class="well">
+            <input type="file" name="profile"/>
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Enregistrer</button>
-      </div>
+      <div class="modal-footer"></div>
     </div>
   </div>
+</div>
 </div>

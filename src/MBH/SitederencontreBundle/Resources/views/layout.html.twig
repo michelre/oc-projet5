@@ -1,4 +1,4 @@
-{#MBH/Sitederencontre/Ressources/views/layout.html.twig #}
+{# àMBH/Sitederencontre/Ressources/views/layout.html.twig #}
 
 <!DOCTYPE html>
 <html>
@@ -14,21 +14,21 @@
 	<title>{% block title %}site de rencontre{% endblock %}</title>
 </head>
 <body>
-	{% block menu %}
-	{% endblock %}}
 	<div class="container">
+		{% block menu %}
+ 			{{ include("MBHSitederencontreBundle:Advert:menu.html.twig")}}
+ 		{% endblock %}
 		<div class="row">
 			{% block body %}
 			{% endblock %}}
 		</div>
-	</div>
 	<footer>
-	
+		<p>The sky's the limit © {{ 'now'|date('Y') }} and beyond.</p>
 	</footer>
-
+	</div>
 	{% block javascripts %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  {% endblock %}
+  	{% endblock %}
 </body>
 </html>

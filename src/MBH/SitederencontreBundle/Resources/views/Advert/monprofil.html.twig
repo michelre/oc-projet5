@@ -21,18 +21,18 @@
  		</div>
  		<div class="col-md-4">
  			<h3>photo de profil</h3>			
- 			
+ 			<img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.username }}" width="100" height="100"/>
  		</div>
  		<div class="col-md-4">
  			<h3>Detail de profil</h3>
- 			<a href="{{ path('mbh_sitederencontre_profilcompleted',{'id': members.id}) }}">Modifier</a>
- 				<div>{{ members.pseudo }}</div>
+ 			<a href="{{ path('mbh_sitederencontre_edit',{'id': members.id}) }}">Modifier</a>
+ 				<div>{{ members.username }}</div>
  				{#<div>{{ members.date }}</div>#}
- 				<div>{{ members.city }}</div>
+ 				<div>Lieu de residence:{{ members.city }}</div>
  				{#<div>{{ members.genre }}</div>#}
  				{#<div>{{ members.pseudo }}</div>#}
  				<div>Job:{{ members.job }}</div>
- 				<div>Lieu de residence:{{ members.description }}</div>
+ 				<div>Description:{{ members.description }}</div>
  		</div>
  	</div>
  	
