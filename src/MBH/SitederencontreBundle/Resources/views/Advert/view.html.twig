@@ -3,40 +3,40 @@
  {% extends 'PROJET5SitederencontreBundle::layout.html.twig' %}
 
  {% block title %}
- 	Profils - {{ parent() }} 	
+   Profils - {{ parent() }}
  {% endblock %}
 
  {% block menu %}
 
- 	ici placera le menu de la page de profils
+   ici placera le menu de la page de profils
  {% endblock %}
 
  {% block body %}
- 	<div class="row">
- 		<div class="col-lg-offset-2 col-md-4">
- 			{% if advert.image is not null %}
- 				<img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
- 			{% endif %}
- 			<div class="row">
- 				<div class="tcheck">
- 					<a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
- 					<i class="fal fa-times-circle"></i>
- 					</a>
- 					<a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
- 					<i class="fas fa-heart-circle"></i>
- 					</a>
- 					<a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
- 					<i class="fas fa-envelope-square"></i>
- 					</a>
- 				</div>
- 					<h3>statut</h3>
- 					<p>name,age</p>
- 					<p>ville</p>
- 					<p>description</p>
- 				<div>
- 				</div>
- 			</div>
- 		</div>
- 	</div>
- 	
+   <div class="row">
+     <div class="col-lg-offset-2 col-md-4">
+       {% if advert.image is not null %}
+         <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+       {% endif %}
+       <div class="row">
+         <div class="tcheck">
+           <a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
+             <i class="fal fa-times-circle"></i>
+           </a>
+           <a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
+             <i class="fas fa-heart-circle"></i>
+           </a>
+           <a href="{{ path('projet5_sitederencontre_view', {'id': advert.id}) }}" class="btn btn-default">
+             <i class="fas fa-envelope-square"></i>
+           </a>
+         </div>
+         <h3>statut</h3>
+         <p>name,age</p>
+         <p>ville</p>
+         <p>description</p>
+         <div>
+         </div>
+       </div>
+     </div>
+   </div>
+
  {% endblock %}

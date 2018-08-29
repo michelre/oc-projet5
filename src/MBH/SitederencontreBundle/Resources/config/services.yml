@@ -2,3 +2,7 @@ services:
   MBH\SitederencontreBundle\Service\FileUploader:
         arguments:
             $targetDirectory: '%kernel.root_dir%/../web/uploads/images'
+
+  MBH\SitederencontreBundle\Service\MessageService:
+            class: MBH\SitederencontreBundle\Service\MessageService
+            arguments: ['@doctrine.orm.entity_manager', '@jms_serializer']

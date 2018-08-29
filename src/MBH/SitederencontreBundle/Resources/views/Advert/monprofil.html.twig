@@ -6,34 +6,56 @@
  	Mon-profil - {{ parent() }} 	
  {% endblock %}
 
- {% block menu %}
+ {% block menuleft %}
+    <li class="nav-item active">
+      <a href="{{ path('mbh_sitederencontre_monprofil', { id: members.id }) }}" class="nav-link">Mon profil</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ path('mbh_sitederencontre_profiles') }}" class="nav-link">Voir les profils</a>
+    </li>
+  {% endblock %}
 
- 	ici placera le menu de la page d'inscription
+ {% block menuRight %}
+   <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_logout') }}">Se déconnecter</a>
  {% endblock %}
 
  {% block body %}
- 	
- 	<div class="row">
- 		<div class="col-md-4">
- 			<h3>Ajouter de nouvelles photos</h3>
- 			<table>
- 			</table>
+ 	<div class="row col-md-12">
+ 		<div class="col align-self-start">
+ 			<h3>photo de profil</h3>
+ 			<img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.pseudo }}"
+          width="200" height="200" class="rounded-circle" />			
  		</div>
- 		<div class="col-md-4">
- 			<h3>photo de profil</h3>			
- 			<img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.username }}" width="100" height="100"/>
- 		</div>
- 		<div class="col-md-4">
+ 		<div class="col align-self-end border-left border-bottom mb-3">
  			<h3>Detail de profil</h3>
- 			<a href="{{ path('mbh_sitederencontre_edit',{'id': members.id}) }}">Modifier</a>
- 				<div>{{ members.username }}</div>
- 				{#<div>{{ members.date }}</div>#}
- 				<div>Lieu de residence:{{ members.city }}</div>
- 				{#<div>{{ members.genre }}</div>#}
- 				{#<div>{{ members.pseudo }}</div>#}
- 				<div>Job:{{ members.job }}</div>
- 				<div>Description:{{ members.description }}</div>
+ 			<b>{{ members.pseudo|upper }}</b>
+ 			<div>{{ members.birthday|date('d/m/y') }}</div>
+ 			<div>{{ members.city }}</div>
+ 			<div>{{ members.gender }}</div>
+ 			<div>Job:{{ members.job }}</div>
+ 			<div>Description:{{ members.description }}</div>
  		</div>
  	</div>
+ 	<div class="container">
+ 	<div class="row">
+ 		<div class="col align-self-start">
+         {% if members.image1 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image1) }}" alt="Image 1" width="250" height="350" class="rounded">
+         {% endif %}
+        </div>
+        <div class="col align-self-center">
+         {% if members.image2 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image2) }}" alt="Image 2" width="250" height="350" class="rounded">
+         {% endif %}
+        </div>
+        <div class="col align-self-end">
+         {% if members.image3 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image3) }}" alt="Image 3" width="250" height="350" class="rounded">
+         {% endif %}
+        </div>
+ 	</div>
+ 	</div>
+ 	
+ 		<a href="{{ path('mbh_sitederencontre_profilcompleted',{'id': members.id}) }}" class="btn btn-primary">Modifier mon profil</a>
  	
  {% endblock %}

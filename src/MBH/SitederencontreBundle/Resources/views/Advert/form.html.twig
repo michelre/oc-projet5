@@ -1,7 +1,44 @@
 {# src/MBH/SitederencontreBundle/Resources/views/Advert/form.html.twig #}
 
-<h3>Inscrivez-vous</h3>
 
-<div class="well">
-{{ form(form) }}
+<div class="m-auto subscription-form pb-3 pt-3">
+  <h3>Inscrivez-vous</h3>
+
+  <form method="post" action="{{ path('mbh_sitederencontre_subscription') }}">
+    <div class="form-group">
+      <label>Pseudo</label>
+      <input name="pseudo" type="text" class="form-control" placeholder="pseudo">
+    </div>
+
+    <div class="form-group">
+      <label>Birthday</label>
+      <input name="birthday" type="date" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>City</label>
+      <input name="city" type="text" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input name="email" type="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input name="password" type="password" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Genre</label>
+      <select name="gender" class="form-control">
+        <option>Homme</option>
+        <option>Femme</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">S'inscrire</button>
+
+  </form>
 </div>

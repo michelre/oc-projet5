@@ -3,10 +3,19 @@
  {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
 
  {% block title %}
- 	Accueil - {{ parent() }} 	
+ 	Accueil - {{ parent() }}
+ {% endblock %}
+
+ {% block menuRight %}
+   <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_login_form') }}">Se connecter</a>
  {% endblock %}
 
  {% block body %}
- 	<h2>Faites de nouvelles rencontres</h2>
- 	{{ include("MBHSitederencontreBundle:Advert:form.html.twig") }}	
+   <div class="container">
+     <h2>Faites de nouvelles rencontres</h2>
+     <div>
+       {{ include("MBHSitederencontreBundle:Advert:form.html.twig") }}
+     </div>
+   </div>
+
  {% endblock %}

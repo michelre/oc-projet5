@@ -1,33 +1,42 @@
-{# src/MBH/Sitederencontre/Ressources/views/Advert/profilcompleted.html.twig #}
-
- {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
-
- {% block title %}
- 	Mon-profil-a-completer - {{ parent() }} 	
- {% endblock %}
-
- {% block menu %}
-
- 	ici placera le menu de la page d'inscription
- {% endblock %}
-
- {% block body %}
- 	
- 	<div class="row">
- 		<div class="col-md-4">
- 			<h3>Ajouter de nouvelles photos</h3>
- 			<table>
- 			</table>
- 		</div>
- 		<div class="col-md-4">
- 			<h3>photo de profil</h3>
-			
- 			{{ include("MBHSitederencontreBundle:Advert:modal.html.twig")}}
- 		</div>
- 		<div class="col-md-4">
- 			
- 			{{ include("MBHSitederencontreBundle:Advert:form.html.twig")}}
- 		</div>
- 	</div>
- 	
- {% endblock %}
+<h3>Veuillez completer votre profil pour faire plus de rencontre</h3>
+<div class="well">
+  <form method="post" action="{{ path('mbh_sitederencontre_updateprofil', { id: members.id }) }}">
+    <div class="form-group">
+      <label>Pseudo</label>
+      <input class="form-control" value="{{ members.pseudo }}" name="pseudo"/>
+    </div>
+    <div class="form-group">
+      <label>Date de naissance</label>
+      <input class="form-control" type="date" value="{{ members.birthday.format('Y-m-d') }}" name="birthday"/>
+    </div>
+    <div class="form-group">
+      <label>Ville</label>
+      <input class="form-control" value="{{ members.city }}" name="city"/>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" type="mail" value="{{ members.email }}" name="email"/>
+    </div>
+    <div class="form-group">
+      <label>Genre</label>
+      <select
+          class="form-control"
+          name="gender"
+          value="{{ members.gender }}"
+      >
+        <option value="">Selectionner</option>
+        <option value="Homme" {% if members.gender == "Homme" %} selected="selected" {% endif %}>Homme</option>
+        <option value="Femme" {% if members.gender == "Femme" %} selected="selected" {% endif %}>Femme</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" name="description">{{ members.description }}</textarea>
+    </div>
+    <div class="form-group">
+      <label>Emploi</label>
+      <input class="form-control" value="{{ members.job }}" name="job">
+    </div>
+    <button class="btn btn-success" type="submit">Modifier mon profil</button>
+  </form>
+</div>

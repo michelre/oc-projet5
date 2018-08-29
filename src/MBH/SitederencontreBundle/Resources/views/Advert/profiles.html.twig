@@ -1,0 +1,65 @@
+{# src/MBH/Sitederencontre/Ressources/views/Advert/monprofil.html.twig #}
+
+ {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
+
+ {% block title %}
+   Profiles - {{ parent() }}
+ {% endblock %}
+
+ {% block menuleft %}
+   <li class="nav-item">
+     <a href="{{ path('mbh_sitederencontre_monprofil', { id: currentUser.id }) }}" class="nav-link">Mon profil</a>
+   </li>
+   <li class="nav-item">
+     <a href="{{ path('mbh_sitederencontre_profiles') }}" class="nav-link active">Voir les profils</a>
+     <!--<span class="nav-link" data-toggle="modal" data-target="#chat">Envoyer un message</span>-->
+   </li>
+ {% endblock %}
+
+ {% block menuRight %}
+   <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_logout') }}">Se déconnecter</a>
+ {% endblock %}
+
+ {% block body %}
+
+   <ul class="list-unstyled w-100">
+     {% for member in members %}
+       <li class="mb-2 profile-item p-3">
+         <div class="d-flex align-items-center">
+           <div>
+             <div
+                 class="profile-avatar mr-3"
+                 style="background: url({{ asset('uploads/images/' ~ member.profileImage) }}) no-repeat center;"></div>
+           </div>
+           <div>
+             <h3>{{ member.pseudo }}</h3>
+             <button class="btn btn-success btn-chat" data-toggle="modal" data-target="#chat-{{ member.id }}">
+               <i class="far fa-envelope mr-2"></i>Contacter
+             </button>
+           </div>
+         </div>
+         <div>
+           <div class="modal fade" id="chat-{{ member.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Envoyer un message</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#chat-{{ member.id }}">
+                     <span aria-hidden="true" data-target="#chat-{{ member.id }}">&times;</span>
+                   </button>
+                 </div>
+                 <div class="modal-body">
+                   <form action="{{ path('mbh_sitederencontre_message_send') }}" method="post" enctype="multipart/form-data">
+                     <div id="#chat-{{ member.id }}--vue" class="chat-app" data-user-to="{{ member.id }}" data-user-from="{{ currentUser.id }}"></div>
+                   </form>
+                 </div>
+                 <div class="modal-footer"></div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </li>
+     {% endfor %}
+   </ul>
+
+ {% endblock %}

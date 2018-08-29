@@ -1,23 +1,30 @@
-{# src/MBH/SitederencontreBundle/Resources/views/Advert/login.html.twig #}
+{# src/MBH/Sitederencontre/Ressources/views/Advert/index.html.twig #}
 
-{% extends 'MBHSitederencontreBundle::layout.html.twig' %}
+ {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
 
-{% block body %}
+ {% block title %}
+   Login - {{ parent() }}
+ {% endblock %}
 
-  {# S'il y a une erreur, on l'affiche dans un joli cadre #}
-  {% if error %}
-    <div class="alert alert-danger">{{ error.message }}</div>
-  {% endif %}
+ {% block menuRight %}
+ {% endblock %}
 
-  {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
-  <form action="{{ path('login') }}" method="post">
-    <label for="username">Login :</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+ {% block body %}
+   <div class="container">
+     <h2>Faites de nouvelles rencontres</h2>
+     <form method="post" action="{{ path('mbh_sitederencontre_login') }}">
+       <div class="form-group">
+         <label>Pseudo</label>
+         <input name="pseudo" type="text" class="form-control" placeholder="pseudo">
+       </div>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="_password" />
-    <br />
-    <input type="submit" value="Connexion" />
-  </form>
+       <div class="form-group">
+         <label>Mot de passe</label>
+         <input name="password" type="password" class="form-control" placeholder="password">
+       </div>
 
-{% endblock %}
+       <button class="btn btn-primary" type="submit">Se connecter</button>
+     </form>
+   </div>
+
+ {% endblock %}

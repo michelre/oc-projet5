@@ -1,38 +1,49 @@
 mbh_sitederencontre_home:
   path:     /
   defaults:
-    _controller: MBHSitederencontreBundle:Advert:index 
+    _controller: MBHSitederencontreBundle:Advert:index
 
+mbh_sitederencontre_subscription:
+  path:     /subscribe
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:subscribe
+  methods: post
+
+mbh_sitederencontre_login_form:
+  path:     /login/form
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:loginForm
+
+mbh_sitederencontre_login:
+  path:     /login
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:login
+  methods: post
+
+mbh_sitederencontre_logout:
+  path:     /logout
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:logout
 
 mbh_sitederencontre_profilcompleted:
   path:     /profilcompleted/{id}
-  defaults: 
+  defaults:
     _controller: MBHSitederencontreBundle:Advert:profilcompleted
-  requirements:
-    id: \d+ 
-
-
-mbh_sitederencontre_view:
-  path:     /profils/{page}
-  defaults: 
-    _controller: MBHSitederencontreBundle:Advert:view
-    page:    1
-  requirements:
-    page: \d*
-    
-
-mbh_sitederencontre_monprofil:
-  path:     /monprofil/{id}
-  defaults: 
-    _controller: MBHSitederencontreBundle:Advert:monprofil
   requirements:
     id: \d+
 
+mbh_sitederencontre_updateprofil:
+  path:     /profilcompleted/{id}/update
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:updateProfil
+  requirements:
+    id: \d+
+  methods: post
 
-mbh_sitederencontre_edit:
-  path:     /edit/{id}
-  defaults: 
-    _controller: MBHSitederencontreBundle:Advert:edit
+mbh_sitederencontre_monprofil:
+  path:     /monprofil/{id}
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:monprofil
   requirements:
     id: \d+
 
@@ -43,3 +54,37 @@ mbh_sitederencontre_imageprofile:
   methods: post
   requirements:
     id: \d+
+
+mbh_sitederencontre_images:
+  path:     /monprofil/{id}/images
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:profileImages
+  methods: post
+  requirements:
+    id: \d+
+
+mbh_sitederencontre_message_send:
+  path:     /message/send
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:sendMessage
+  methods: post
+  requirements:
+    id: \d+
+
+mbh_sitederencontre_message_feed:
+  path:     /messages/{participant1}/{participant2}
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:getMessages
+  methods: get
+
+mbh_sitederencontre_users:
+  path:     /users
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:findUsers
+  methods: get
+
+mbh_sitederencontre_profiles:
+  path:     /profiles
+  defaults:
+    _controller: MBHSitederencontreBundle:Advert:listProfiles
+  methods: get

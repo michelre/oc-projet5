@@ -3,9 +3,8 @@
 namespace MBH\SitederencontreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use FOS\UserBundle\Model\User as BaseUser;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * Members
@@ -13,28 +12,37 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="members")
  * @ORM\Entity(repositoryClass="MBH\SitederencontreBundle\Repository\MembersRepository")
  */
-class Members extends BaseUser
+class Members extends BaseUser implements ParticipantInterface
 {
     /**
-    * @ORM\Column(name="id", type="integer")
-    * @ORM\Id
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pseudo", type="string", length=255)
+     */
+    protected $pseudo;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="datetime")
      */
-    private $birthday;
+    protected $birthday;
 
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string
@@ -70,7 +78,29 @@ class Members extends BaseUser
      */
     private $profileImage;
 
-    private $images;
+    /**
+     * @var string
+     * @ORM\Column(name="image1", type="string", nullable=true)
+     */
+    private $image1;
+
+    /**
+     * @var string
+     * @ORM\Column(name="image2", type="string", nullable=true)
+     */
+    private $image2;
+
+    /**
+     * @var string
+     * @ORM\Column(name="image3", type="string", nullable=true)
+     */
+    private $image3;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 
     /**
      * Get id.
@@ -80,6 +110,30 @@ class Members extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set pseudo.
+     *
+     * @param string $pseudo
+     *
+     * @return Members
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * Get pseudo.
+     *
+     * @return string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
     }
 
     /**
@@ -254,9 +308,55 @@ class Members extends BaseUser
         $this->profileImage = $profileImage;
     }
 
-    public function eraseCredentials()
+    /**
+     * @return string
+     */
+    public function getImage1()
     {
-
+        return $this->image1;
     }
+
+    /**
+     * @param string $image1
+     */
+    public function setImage1($image1)
+    {
+        $this->image1 = $image1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage2()
+    {
+        return $this->image2;
+    }
+
+    /**
+     * @param string $image2
+     */
+    public function setImage2($image2)
+    {
+        $this->image2 = $image2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage3()
+    {
+        return $this->image3;
+    }
+
+    /**
+     * @param string $image3
+     */
+    public function setImage3($image3)
+    {
+        $this->image3 = $image3;
+    }
+
+
+
 
 }

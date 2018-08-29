@@ -8,6 +8,9 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -17,8 +20,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new MBH\SitederencontreBundle\MBHSitederencontreBundle(),
-            new MBH\UserBundle\MBHUserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

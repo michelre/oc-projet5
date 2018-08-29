@@ -1,33 +1,4 @@
-{# src/MBH/Sitederencontre/Ressources/views/Advert/profilcompleted.html.twig #}
-
- {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
-
- {% block title %}
- 	Mon-profil-a-completer - {{ parent() }} 	
- {% endblock %}
-
- {% block menu %}
-
- 	ici placera le menu de la page d'inscription
- {% endblock %}
-
- {% block body %}
- 	
- 	<div class="row">
- 		<div class="col-md-4">
- 			<h3>Ajouter de nouvelles photos</h3>
- 			<table>
- 			</table>
- 		</div>
- 		<div class="col-md-4">
- 			<h3>photo de profil</h3>
-			
- 			{{ include("MBHSitederencontreBundle:Advert:modal.html.twig")}}
- 		</div>
- 		<div class="col-md-4">
- 			
- 			{{ include("MBHSitederencontreBundle:Advert:form.html.twig")}}
- 		</div>
- 	</div>
- 	
- {% endblock %}
+<h3>Modifier votre profil</h3>
+<div class="well">
+  {{form(form)}}
+</div>

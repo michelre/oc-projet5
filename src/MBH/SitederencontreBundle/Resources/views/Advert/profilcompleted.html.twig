@@ -3,35 +3,88 @@
  {% extends 'MBHSitederencontreBundle::layout.html.twig' %}
 
  {% block title %}
- 	Mon-profil-a-completer - {{ parent() }}
+   Mon profil - {{ parent() }}
  {% endblock %}
 
- {% block menu %}
+  {% block menuleft %}
+    <li class="nav-item active">
+      <a href="{{ path('mbh_sitederencontre_monprofil', { id: members.id }) }}" class="nav-link">Mon profil</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ path('mbh_sitederencontre_profiles') }}" class="nav-link">Voir les profils</a>
+    </li>
+  {% endblock %}
 
- 	ici placera le menu de la page d'inscription
+ {% block menuRight %}
+   <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_logout') }}">Se déconnecter</a>
  {% endblock %}
 
  {% block body %}
 
- 	<div class="row">
- 		<div class="col-md-4">
- 			<h3>Ajouter de nouvelles photos</h3>
- 		</div>
- 		<div class="col-md-4">
- 			<h3>photo de profil</h3>
- 			<div class="row">
- 				<div class="col-md-12">
-				<img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.username }}" width="100" height="100"/>
-				
-					<div class="col-md-12">
- 					{{ include("MBHSitederencontreBundle:Advert:modal.html.twig")}}
- 					</div>
- 				</div>
- 			</div>
- 		</div>
- 		<div class="col-md-4">	
- 			{{ include("MBHSitederencontreBundle:Advert:form.html.twig")}}
- 		</div>
- 	</div>
+   <div class="row">
+     <div class="col-md-8">
+       <h4>Ajouter de nouvelles photos</h4>
+       <div class="row">
+        <div class="col-md-4">
+         {% if members.image1 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image1) }}" alt="Image 1" width="100" height="100">
+         {% endif %}
+        </div>
+        <div class="col-md-4">
+         {% if members.image2 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image2) }}" alt="Image 2" width="100" height="100">
+         {% endif %}
+        </div>
+        <div class="col-md-4">
+         {% if members.image3 is not null %}
+           <img src="{{ asset('uploads/images/' ~ members.image3) }}" alt="Image 3" width="100" height="100">
+         {% endif %}
+        </div>
+        
+         <!-- Button trigger modal -->
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#photos">
+           Modifier mes photos
+         </button>
+
+         <!-- Modal -->
+         <div class="modal fade" id="photos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Modifier mes photos</h5>
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class="modal-body">
+                 <form action="{{ path('mbh_sitederencontre_images',{'id': members.id}) }}" method="post"
+                       enctype="multipart/form-data">
+                   <div class="well">
+                     <input type="file" name="image-1"/>
+                     <input type="file" name="image-2" value="{{ members.image2 }}"/>
+                     <input type="file" name="image-3" value="{{ members.image3 }}"/>
+                   </div>
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                   <button type="submit" class="btn btn-primary">Enregistrer</button>
+                 </form>
+               </div>
+               <div class="modal-footer"></div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="col-md-4">
+     <h3>photo de profil</h3>
+     <img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.pseudo }}"
+          width="100" height="100"/>
+
+     {{ include("MBHSitederencontreBundle:Advert:modal.html.twig") }}
+   </div>
+   <div id="profil_completed" class="col-md-8">
+     {{ include("MBHSitederencontreBundle:Advert:add.html.twig") }}
+   </div>
 
  {% endblock %}
