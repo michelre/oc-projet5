@@ -24,11 +24,12 @@ class NotificationService
 
         $threads = $this->messageProvider->getInboxThreads();
         $messages = [];
+        $userIds = [];
         /** @var Thread $thread */
         foreach ($threads as $thread) {
             /** @var Message $message */
             foreach ($thread->getMessages() as $message){
-                if($message->getSender()->getId() !== $user->getId()){
+                if($message->getSender()->getId() !== $user->getId() && !isset($userIds[$message->getSender()->getId()])){
                     /** @var Members $member */
                     $member = $this->em->getRepository(Members::class)->find($message->getSender()->getId());
                     array_push($messages, array(
@@ -36,6 +37,7 @@ class NotificationService
                         'profileImage' => $member->getProfileImage(),
                         'pseudo' => $member->getPseudo()
                     ));
+                    $userIds[$member->getId()] = array();
                 }
             }
         }
