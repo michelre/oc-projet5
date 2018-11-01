@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use MBH\SitederencontreBundle\Service\NotificationService;
 
 class AdvertController extends Controller
 {
@@ -147,10 +148,15 @@ class AdvertController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $members = $em->getRepository('MBHSitederencontreBundle:Members')->find($id);
+        $user = $this->getUser();
+
         if (null === $members) {
             throw new NotFoundHttpException("Le profil" . $id . "n'existe pas.");
         }
-        return $this->render('MBHSitederencontreBundle:Advert:monprofil.html.twig', array('members' => $members,));
+
+        $notificationService = $this->get(NotificationService::class);
+        $hasNotification = $notificationService->hasNotifications($user);
+        return $this->render('MBHSitederencontreBundle:Advert:monprofil.html.twig', array('members' => $members, 'user'=> $user, 'hasNotification' => $hasNotification));
     }
 
     public function matchesAction(Request $request)

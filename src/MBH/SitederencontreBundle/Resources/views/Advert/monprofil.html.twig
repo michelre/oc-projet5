@@ -8,7 +8,7 @@
 
  {% block menuleft %}
     <li class="nav-item active">
-      <a href="{{ path('mbh_sitederencontre_monprofil', { id: members.id }) }}" class="nav-link">Mon profil</a>
+      <a href="{{ path('mbh_sitederencontre_monprofil', { id: user.id }) }}" class="nav-link">Mon profil</a>
     </li>
     <li class="nav-item">
       <a href="{{ path('mbh_sitederencontre_profiles') }}" class="nav-link">Voir les profils</a>
@@ -16,46 +16,86 @@
   {% endblock %}
 
  {% block menuRight %}
+  <div class="tooltip">
+    <div class="fas fa-bell text-white {% if hasNotification %} text-danger {% endif %}" data-toggle="tooltip" data-placement="bottom">
+     {# {% for message in message.body %}
+        <div class="row">
+          <div class="col-md-3">
+            {{message.sender}} (<small>{{message.createdAt | date('d/m/y')}}</small>)
+          </div>
+          <div class="col-md-9">
+            {message.body | raw}
+          </div>
+        </div>
+      {% endfor %}#}
+    </div>
+  </div>
    <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_logout') }}">Se déconnecter</a>
  {% endblock %}
 
  {% block body %}
- 	<div class="row col-md-12">
- 		<div class="col align-self-start">
- 			<h3>photo de profil</h3>
+ 	<div class="container">	
+    <div class="profil-photo">
+ 			<h3>Photo de profil</h3>  
  			<img src="{{ asset('uploads/images/' ~ members.profileImage) }}" alt="photo de profile {{ members.pseudo }}"
-          width="200" height="200" class="rounded-circle" />			
- 		</div>
- 		<div class="col align-self-end border-left border-bottom mb-3">
- 			<h3>Detail de profil</h3>
- 			<b>{{ members.pseudo|upper }}</b>
- 			<div>{{ members.birthday|date('d/m/y') }}</div>
- 			<div>{{ members.city }}</div>
- 			<div>{{ members.gender }}</div>
- 			<div>Job:{{ members.job }}</div>
- 			<div>Description:{{ members.description }}</div>
- 		</div>
- 	</div>
- 	<div class="container">
- 	<div class="row">
- 		<div class="col align-self-start">
+          width="200" height="200" class="rounded-circle" />
+      {% if members.id != user.id %}
+      <button class="btn btn-outline-success  btn-chat" data-toggle="modal" data-target="#chat-{{ members.id }}">
+        <i class="fas fa-envelope">Chats</i>
+      </button>
+        
+      {% endif %}  
+    </div>	
+
+ 	  <div class="profil">
+    <div class="row">
+        <div class="col-md-6">	  
          {% if members.image1 is not null %}
-           <img src="{{ asset('uploads/images/' ~ members.image1) }}" alt="Image 1" width="250" height="350" class="rounded">
+           <img src="{{ asset('uploads/images/' ~ members.image1) }}" alt="Image 1" width="100" height="150" class="rounded">
          {% endif %}
-        </div>
-        <div class="col align-self-center">
+      
          {% if members.image2 is not null %}
-           <img src="{{ asset('uploads/images/' ~ members.image2) }}" alt="Image 2" width="250" height="350" class="rounded">
+           <img src="{{ asset('uploads/images/' ~ members.image2) }}" alt="Image 2" width="100" height="150" class="rounded">
          {% endif %}
-        </div>
-        <div class="col align-self-end">
+      
          {% if members.image3 is not null %}
-           <img src="{{ asset('uploads/images/' ~ members.image3) }}" alt="Image 3" width="250" height="350" class="rounded">
+           <img src="{{ asset('uploads/images/' ~ members.image3) }}" alt="Image 3" width="100" height="150" class="rounded">
          {% endif %}
         </div>
- 	</div>
- 	</div>
- 	
+
+        <div class="col-md-6 border-left border-bottom shadow p-3 mb-5 bg-white rounded">
+          <h3>Details de profil</h3>
+          <b>{{ members.pseudo|upper }}</b>
+          <div>{{ members.birthday|date('d/m/y') }}</div>
+          <div>{{ members.gender }}</div>
+          <div><strong>Ville</strong>:{{ members.city }}</div>
+          <div><strong>Job</strong>:{{ members.job }}</div>
+          <div><strong>Description</strong>:{{ members.description }}</div>
+        </div>
+    </div>
+ 	{% if members.id == user.id %}
  		<a href="{{ path('mbh_sitederencontre_profilcompleted',{'id': members.id}) }}" class="btn btn-primary">Modifier mon profil</a>
- 	
+  {% endif %}
+ 	</div>
+  </div>
+  <div>
+           <div class="modal fade" id="chat-{{ members.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLabel">Envoyer un message</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-target="#chat-{{ members.id }}">
+                     <span aria-hidden="true" data-target="#chat-{{ members.id }}">&times;</span>
+                   </button>
+                 </div>
+                 <div class="modal-body">
+                   <form action="{{ path('mbh_sitederencontre_message_send') }}" method="post" enctype="multipart/form-data">
+                     <div id="#chat-{{ members.id }}--vue" class="chat-app" data-user-to="{{ members.id }}" data-user-from="{{ user.id }}"></div>
+                   </form>
+                 </div>
+                 <div class="modal-footer"></div>
+               </div>
+             </div>
+           </div>
+         
  {% endblock %}

@@ -6,3 +6,7 @@ services:
   MBH\SitederencontreBundle\Service\MessageService:
             class: MBH\SitederencontreBundle\Service\MessageService
             arguments: ['@doctrine.orm.entity_manager', '@jms_serializer']
+
+  MBH\SitederencontreBundle\Service\NotificationService:
+            class: MBH\SitederencontreBundle\Service\NotificationService
+            arguments: ['@doctrine.orm.entity_manager', '@jms_serializer']

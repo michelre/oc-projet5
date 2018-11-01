@@ -3,14 +3,17 @@
 namespace MBH\SitederencontreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
+use Mgilet\NotificationBundle\NotifiableInterface;
 
 /**
  * Messages
  *
  * @ORM\Table(name="messages")
  * @ORM\Entity(repositoryClass="MBH\SitederencontreBundle\Repository\MessagesRepository")
+ *@Notifiable(name="messages")
  */
-class Messages
+class Messages implements NotifiableInterface
 {
     /**
     * @ORM\ManyToOne(targetEntity="MBH\SitederencontreBundle\Entity\Members")
