@@ -17,18 +17,47 @@
 
  {% block menuRight %}
   <div class="tooltip">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+
+
+
     <div class="fas fa-bell text-white {% if hasNotification %} text-danger {% endif %}" data-toggle="tooltip" data-placement="bottom">
-     {# {% for message in message.body %}
+      {% for notification in notifications %}
         <div class="row">
           <div class="col-md-3">
-            {{message.sender}} (<small>{{message.createdAt | date('d/m/y')}}</small>)
+            {{notification.pseudo}} {#(<small>{{message.createdAt | date('d/m/y')}}</small>)#}
           </div>
           <div class="col-md-9">
-            {message.body | raw}
+            {notification.body | raw}
           </div>
         </div>
-      {% endfor %}#}
+      {% endfor %}
     </div>
+  </div>
+   <div class="dropdown">
+     <i class="fas fa-bell text-white cursor-pointer {% if hasNotification %} text-danger {% endif %}" id="dropdownMenuButton" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       {% for notification in notifications %}
+         <div class="row">
+           <div class="col-md-3">
+             {{notification.pseudo}} {#(<small>{{message.createdAt | date('d/m/y')}}</small>)#}
+           </div>
+           <div class="col-md-9">
+             {{ notification.body }}
+           </div>
+         </div>
+       {% endfor %}
+     </div>
+   </div>
+   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
   </div>
    <a class="nav-item text-white nav-link" href="{{ path('mbh_sitederencontre_logout') }}">Se déconnecter</a>
  {% endblock %}

@@ -9,4 +9,4 @@ services:
 
   MBH\SitederencontreBundle\Service\NotificationService:
             class: MBH\SitederencontreBundle\Service\NotificationService
-            arguments: ['@doctrine.orm.entity_manager', '@jms_serializer']
+            arguments: ['@doctrine.orm.entity_manager', '@fos_message.provider']

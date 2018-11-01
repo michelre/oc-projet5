@@ -155,8 +155,11 @@ class AdvertController extends Controller
         }
 
         $notificationService = $this->get(NotificationService::class);
-        $hasNotification = $notificationService->hasNotifications($user);
-        return $this->render('MBHSitederencontreBundle:Advert:monprofil.html.twig', array('members' => $members, 'user'=> $user, 'hasNotification' => $hasNotification));
+        $notifications = $notificationService->hasNotifications($user);
+        return $this->render('MBHSitederencontreBundle:Advert:monprofil.html.twig',
+            array('members' => $members, 'user'=> $user,
+                'hasNotification' => count($notifications) > 0,
+                'notifications' => $notifications));
     }
 
     public function matchesAction(Request $request)

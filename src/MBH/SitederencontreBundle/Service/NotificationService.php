@@ -3,18 +3,42 @@
 namespace MBH\SitederencontreBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use FOS\MessageBundle\Provider\ProviderInterface;
+use MBH\SitederencontreBundle\Entity\Members;
+use MBH\SitederencontreBundle\Entity\Message;
+use MBH\SitederencontreBundle\Entity\Thread;
 
 class NotificationService
 {
     private $em;
-    public function __construct(EntityManager $em)
+    private $messageProvider;
+
+    public function __construct(EntityManager $em, ProviderInterface $messageProvider)
     {
         $this->em = $em;
+        $this->messageProvider = $messageProvider;
     }
 
-    public function hasNotifications($user)
+    public function hasNotifications(Members $user)
     {
-        $message = $this->em->getRepository('MBHSitederencontreBundle:Message')->findBy(array('senderId' => $user->getId()));
-    var_dump($message);
+
+        $threads = $this->messageProvider->getInboxThreads();
+        $messages = [];
+        /** @var Thread $thread */
+        foreach ($threads as $thread) {
+            /** @var Message $message */
+            foreach ($thread->getMessages() as $message){
+                if($message->getSender()->getId() !== $user->getId()){
+                    /** @var Members $member */
+                    $member = $this->em->getRepository(Members::class)->find($message->getSender()->getId());
+                    array_push($messages, array(
+                        'body' => $message->getBody(),
+                        'profileImage' => $member->getProfileImage(),
+                        'pseudo' => $member->getPseudo()
+                    ));
+                }
+            }
+        }
+        return $messages;
     }
 }
